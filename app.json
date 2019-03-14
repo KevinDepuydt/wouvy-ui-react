@@ -1,0 +1,22 @@
+{
+  "addons": [
+    "papertrail"
+  ],
+  "buildpacks": [
+    {
+      "url": "https://buildpack-registry.s3.amazonaws.com/buildpacks/mars/create-react-app.tgz"
+    }
+  ],
+  "env": {
+    "PAPERTRAIL_API_TOKEN": {
+      "required": true
+    }
+  },
+  "formation": {
+    "web": {
+      "quantity": 1
+    }
+  },
+  "name": "wouvy-ui-react",
+  "stack": "heroku-18"
+}
