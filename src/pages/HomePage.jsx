@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 class HomePage extends Component {
   render() {
+    console.log('HomePage.render');
     return (
       <div>
         <p>Home</p>
