@@ -1,13 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { ThemeProvider } from 'styled-components';
 import * as serviceWorker from './serviceWorker';
-// import App from './App';
-import AppRouter from './AppRouter';
+import App from './App';
 import { AuthProvider } from './contexts/AuthContext';
+import { theme, GlobalStyle } from './config/styles';
 
 ReactDOM.render(
   <AuthProvider>
-    <AppRouter />
+    <GlobalStyle />
+    <ThemeProvider theme={theme}>
+      <App />
+    </ThemeProvider>
   </AuthProvider>,
   document.getElementById('root'),
 );

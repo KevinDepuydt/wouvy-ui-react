@@ -2,13 +2,14 @@ import React from 'react';
 import { BrowserRouter, Switch, Route as BaseRoute, Redirect } from 'react-router-dom';
 import { AuthContext } from './contexts/AuthContext';
 import HomePage from './pages/HomePage';
-import LoginPage from './pages/LoginPage';
+import SigninPage from './pages/SigninPage';
+import SignupPage from './pages/SignupPage';
 
 const ProtectedRoute = ({ component: Component, ...props }) => (
   <AuthContext.Consumer>
     {({ user }) => (
       <BaseRoute
-        render={props => user !== null ? <Component {...props} /> : <Redirect to="/login" />}
+        render={props => user !== null ? <Component {...props} /> : <Redirect to="/signin" />}
         {...props}
       />
     )}
@@ -35,7 +36,8 @@ const AppRouter = () => (
   <BrowserRouter>
     <Switch>
       <ProtectedRoute exact path="/" component={HomePage} />
-      <Route path="/login" component={LoginPage} />
+      <Route path="/signin" component={SigninPage} />
+      <Route path="/signup" component={SignupPage} />
       <Route component={NotFound} />
     </Switch>
   </BrowserRouter>
