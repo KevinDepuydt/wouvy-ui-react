@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { Formik } from 'formik';
 import AuthService from '../services/auth';
 import { withAuthContext } from '../contexts/AuthContext';
+import SocialAuthBanner from '../components/SocialAuthBanner';
 
 const EMAIL_REGEX = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
 
@@ -33,6 +34,7 @@ class SigninPage extends Component {
         <p>Sign in</p>
         <Link to="/">Home</Link>
         <Link to="/signup">Register</Link>
+        <SocialAuthBanner />
         <Formik
           initialValues={{ email: '', password: '' }}
           validate={values => {

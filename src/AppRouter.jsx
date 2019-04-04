@@ -4,6 +4,7 @@ import { AuthContext } from './contexts/AuthContext';
 import HomePage from './pages/HomePage';
 import SigninPage from './pages/SigninPage';
 import SignupPage from './pages/SignupPage';
+import OAuthCallbackPage from './pages/OAuthCallbackPage';
 
 const ProtectedRoute = ({ component: Component, ...props }) => (
   <AuthContext.Consumer>
@@ -38,6 +39,7 @@ const AppRouter = () => (
       <ProtectedRoute exact path="/" component={HomePage} />
       <Route path="/signin" component={SigninPage} />
       <Route path="/signup" component={SignupPage} />
+      <Route path="/oauth" component={OAuthCallbackPage} />
       <Route component={NotFound} />
     </Switch>
   </BrowserRouter>

@@ -45,7 +45,6 @@ class AuthProvider extends React.Component {
     console.log('AuthProvider.login');
     localStorage.removeItem(USER_TOKEN_KEY);
     this.setState({ token: null, user: null });
-    // @TODO: redirect to login ?
   }
 
   render() {
