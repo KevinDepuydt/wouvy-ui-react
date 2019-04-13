@@ -1,16 +1,15 @@
 import React from 'react';
 import { BrowserRouter, Switch, Route as BaseRoute, Redirect } from 'react-router-dom';
-import { AuthContext } from './contexts/AuthContext';
-import HomePage from './pages/HomePage';
-import SigninPage from './pages/SigninPage';
-import SignupPage from './pages/SignupPage';
-import OAuthCallbackPage from './pages/OAuthCallbackPage';
+import { AuthContext, withLoading } from './contexts/AuthContext';
+import { AuthPage, HomePage, NotFoundPage, UserProfilePage } from './components/pages';
+import TopBar from './components/TopBar';
+import AppLoader from './components/AppLoader';
 
-const ProtectedRoute = ({ component: Component, ...props }) => (
+export const ProtectedRoute = ({ component: Component, ...props }) => (
   <AuthContext.Consumer>
     {({ user }) => (
       <BaseRoute
-        render={props => user !== null ? <Component {...props} /> : <Redirect to="/signin" />}
+        render={props => user !== null ? <Component {...props} /> : <Redirect to="/auth/signin" />}
         {...props}
       />
     )}
@@ -20,7 +19,7 @@ const ProtectedRoute = ({ component: Component, ...props }) => (
 /**
  * Re-define react-router-dom Route to redirect user to home page if already logged in
  */
-const Route = ({ component: Component, ...props }) => (
+export const Route = ({ component: Component, ...props }) => (
   <AuthContext.Consumer>
     {({ user }) => (
       <BaseRoute
@@ -31,18 +30,23 @@ const Route = ({ component: Component, ...props }) => (
   </AuthContext.Consumer>
 );
 
-const NotFound = () => (<p>Not found =/</p>);
-
-const AppRouter = () => (
+const AppRouter = ({ loading }) => (
   <BrowserRouter>
-    <Switch>
-      <ProtectedRoute exact path="/" component={HomePage} />
-      <Route path="/signin" component={SigninPage} />
-      <Route path="/signup" component={SignupPage} />
-      <Route path="/oauth" component={OAuthCallbackPage} />
-      <Route component={NotFound} />
-    </Switch>
+    {loading
+      ? (<AppLoader />)
+      : (
+        <React.Fragment>
+          <TopBar />
+          <Switch>
+            <ProtectedRoute exact path="/" component={HomePage} />
+            <ProtectedRoute path="/profile" component={UserProfilePage} />
+            <Route path="/auth" component={AuthPage} />
+            <BaseRoute component={NotFoundPage} />
+          </Switch>
+        </React.Fragment>
+      )
+    }
   </BrowserRouter>
 );
 
-export default AppRouter;
+export default withLoading(AppRouter);

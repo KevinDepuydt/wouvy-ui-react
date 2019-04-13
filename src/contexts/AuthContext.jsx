@@ -3,7 +3,7 @@ import jwtDecode from 'jwt-decode';
 
 const AuthContext = createContext([]);
 
-const USER_TOKEN_KEY = 'token';
+export const USER_TOKEN_KEY = 'token';
 
 class AuthProvider extends React.Component {
   constructor(props) {
@@ -11,6 +11,7 @@ class AuthProvider extends React.Component {
     this.state = {
       user: null,
       token: null,
+      loading: true,
     };
     this.authenticate = this.authenticate.bind(this);
     this.logout = this.logout.bind(this);
@@ -22,6 +23,7 @@ class AuthProvider extends React.Component {
     const token = localStorage.getItem(USER_TOKEN_KEY);
     console.log('AuthProvider.componentDidMount: user is logged', token !== null);
     this.initUser(token);
+    this.setState({ loading: false });
   }
 
   initUser(token) {
@@ -49,13 +51,14 @@ class AuthProvider extends React.Component {
 
   render() {
     console.log('AuthProvider.render', this.state);
-    const { user } = this.state;
+    const { user, loading } = this.state;
     return (
       <AuthContext.Provider
         value={{
           authenticate: this.authenticate,
           logout: this.logout,
           user,
+          loading,
         }}
       >
         {this.props.children}
@@ -78,4 +81,10 @@ const withUser = Component => props => (
   </AuthContext.Consumer>
 );
 
-export { AuthContext, AuthProvider, withAuthContext, withUser };
+const withLoading = Component => props => (
+  <AuthContext.Consumer>
+    {store => <Component {...props} loading={store.loading} />}
+  </AuthContext.Consumer>
+);
+
+export { AuthContext, AuthProvider, withAuthContext, withUser, withLoading };

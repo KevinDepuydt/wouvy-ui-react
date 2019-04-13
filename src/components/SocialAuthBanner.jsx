@@ -15,7 +15,7 @@ const Container = styled.div`
 
 const StyledAuthLink = styled.a`
   font-size: 3rem;
-  margin: 10px;
+  margin: ${props => props.theme.size.XS};
   text-decoration: none;
   cursor: pointer;
   color: ${props => props.theme.color.lightGray};

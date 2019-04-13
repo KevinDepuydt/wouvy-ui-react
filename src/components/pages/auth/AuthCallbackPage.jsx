@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
 import { parse } from 'query-string';
-import { withAuthContext } from '../contexts/AuthContext';
+import { withAuthContext } from '../../../contexts/AuthContext';
 
-class OAuthCallbackPage extends React.Component {
+class AuthCallbackPage extends React.Component {
   static propTypes = {
     authenticate: PropTypes.func.isRequired,
   };
@@ -27,4 +27,4 @@ class OAuthCallbackPage extends React.Component {
   }
 }
 
-export default withAuthContext(OAuthCallbackPage);
+export default withAuthContext(AuthCallbackPage);

@@ -20,6 +20,8 @@ import IcomoonWoff from '../assets/fonts/icomoon.woff';
 export const theme = {
   background: {
     body: '#f8f9fa',
+    topMenu: '#fff',
+    container: '#f5f5f5',
   },
   color: {
     white: '#ffffff',
@@ -37,17 +39,27 @@ export const theme = {
     google: '#dd4b39',
     github: '#333333',
     linkedin: '#0077b5',
+    button: {
+      yellow: '#ffd91b',
+      red: '#e74c3c',
+      green: '#259f56',
+      purple: '#a8a3ed',
+      grey: '#efefef',
+    },
   },
-  font: {
-    size: {
-      root: '16px',
-      XS: '0.625rem', // 10 px
-      S: '0.75rem', // 12 px
-      M: '0.875rem', // 14px
-      L: '1rem', // 16px
-      XL: '1.125rem', // 18 px
-      XXL: '1.25rem', // 20 px
-    }
+  size: {
+    root: '16px',
+    XXS: '0.5rem', // 8px
+    XS: '0.625rem', // 10 px
+    S: '0.75rem', // 12 px
+    M: '0.875rem', // 14px
+    L: '1rem', // 16px
+    XL: '1.125rem', // 18 px
+    XXL: '1.25rem', // 20 px
+  },
+  shadow: {
+    default: '0 0 10px 2px rgba(0, 0, 0, 0.03)',
+    documentItem: '0 2px 2px 1px rgba(0, 0, 0, 0.05)'
   }
 };
 
@@ -203,16 +215,38 @@ export const GlobalStyle = createGlobalStyle`
   .icon-twitter:before {
     content: "\\e90c";
   }
+  
+  @keyframes blinker {
+    50% {
+      opacity: 0.6;
+    }
+  }
 
   html, body {
     background: ${theme.background.main};
     color: ${theme.color.darkGray};
-    font: ${theme.font.size.root} "Open Sans", sans-serif;
+    font: ${theme.size.root} "Open Sans", sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     padding: 0;
     margin: 0;
     border: 0;
+  }
+  
+  #root {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100vw;
     overflow: hidden;
+  }
+  
+  a {
+    color: #999a9c;
+    transition: color .2s ease-out;
+    
+    &:hover, &:focus {
+      color: ${theme.color.darkGray};
+    }
   }
 `;
