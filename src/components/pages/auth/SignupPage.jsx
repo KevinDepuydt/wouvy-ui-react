@@ -55,7 +55,7 @@ class SignupPage extends Component {
       <ContentContainer>
         <Title>Inscription</Title>
         <Formik
-          initialValues={{ email: '', password: '', acceptCGUV: false }}
+          initialValues={{ email: '', password: '', confirmation: '', acceptCGUV: false }}
           validate={values => {
             let errors = {};
             if (!values.email) {
@@ -66,6 +66,10 @@ class SignupPage extends Component {
 
             if (!values.password) {
               errors.password = 'Veuillez renseigner votre mot de passe';
+            } else if (!values.confirmation) {
+              errors.confirmation = 'Veuillez renseigner la confirmation du mot de passe';
+            } else if (values.password !== values.confirmation) {
+              errors.confirmation = 'Les mots de passe ne correspondent pas';
             }
 
             return errors;
@@ -100,7 +104,6 @@ class SignupPage extends Component {
                 <Form.Label htmlFor="password">Mot de passe</Form.Label>
                 <Form.Input
                   id="password"
-                  key="password"
                   type="password"
                   name="password"
                   onChange={handleChange}
@@ -108,6 +111,18 @@ class SignupPage extends Component {
                   value={values.password}
                 />
                 <Form.Error>{errors.password && touched.password && errors.password}</Form.Error>
+              </Form.Group>
+              <Form.Group>
+                <Form.Label htmlFor="confirmation">Vérification</Form.Label>
+                <Form.Input
+                  id="confirmation"
+                  type="password"
+                  name="confirmation"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.confirmation}
+                />
+                <Form.Error>{errors.confirmation && touched.confirmation && errors.confirmation}</Form.Error>
               </Form.Group>
               <Form.Group>
                 <Checkbox
