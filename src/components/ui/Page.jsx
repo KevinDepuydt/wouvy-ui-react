@@ -32,11 +32,15 @@ const FlexBox = styled.div`
 const FlexRow = styled.div`
   display: flex;
   flex-direction: row;
+  align-items: ${props => props.align || 'initial'};
+  justify-content: ${props => props.justify || 'initial'};
 `;
 
 const FlexColumn = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: ${props => props.align || 'initial'};
+  justify-content: ${props => props.justify || 'initial'};
 `;
 
 export default class Page extends React.Component {

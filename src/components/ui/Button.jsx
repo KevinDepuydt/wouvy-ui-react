@@ -18,6 +18,7 @@ const btnStyles = css`
 
   :focus, :hover, :active {
     cursor: pointer;
+    color: ${props => props.color === 'grey' ? props.theme.color.lightGray : '#fff'};
     background-color: ${props => props.color === 'grey' ? darken(0.05, props.theme.color.button[props.color]) : lighten(0.05, props.theme.color.button[props.color])};
     box-shadow: 0 0 80px 5px ${props => rgba(props.theme.color.button[props.color], 0.4)};
   }
@@ -62,6 +63,7 @@ Button.defaultProps = {
 
 const StyledLinkButton = styled(Link)`
   ${btnStyles}
+  text-decoration: none;
 `;
 
 export const LinkButton = ({ children, ...props }) => (

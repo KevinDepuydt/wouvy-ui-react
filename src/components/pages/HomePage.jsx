@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { withAuthContext } from '../../contexts/AuthContext';
 import WorkflowService from '../../services/workflow';
-import { Page } from '../ui';
+import { Page, LinkButton } from '../ui';
 
 const Title = styled(Page.Title)`
   font-size: 2rem;
@@ -48,11 +48,11 @@ class HomePage extends Component {
     return (
       <Page>
         <Page.FlexColumn>
-          <Page.FlexBox>
-
-          </Page.FlexBox>
-          <Page.FlexBox>
+          <Page.FlexRow align="center" justify="space-between">
             <Title>Bienvenue {user.username || user.firstname || user.email}</Title>
+            <LinkButton to="/w/create">Nouveau workflow</LinkButton>
+          </Page.FlexRow>
+          <Page.FlexBox>
             <Page.Box>
               {this.state.workflows.map(wf => (<WorkflowItem />))}
             </Page.Box>
