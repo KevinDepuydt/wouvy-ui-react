@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+import styled, { css } from 'styled-components';
 import { darken, lighten, rgba } from 'polished';
 
-const StyledButton = styled.button`
+const btnStyles = css`
   padding: ${props => props.theme.size.XXS} ${props => props.theme.size.S};
   border: none;
   font: ${props => props.theme.size.S} "Open Sans Bold", sans-serif;
@@ -43,7 +44,11 @@ const StyledButton = styled.button`
   }
 `;
 
-const Button = ({ children, ...props }) => (
+const StyledButton = styled.button`
+  ${btnStyles}
+`;
+
+export const Button = ({ children, ...props }) => (
   <StyledButton {...props}>{children}</StyledButton>
 );
 
@@ -55,4 +60,18 @@ Button.defaultProps = {
   color: 'yellow',
 };
 
-export default Button;
+const StyledLinkButton = styled(Link)`
+  ${btnStyles}
+`;
+
+export const LinkButton = ({ children, ...props }) => (
+  <StyledLinkButton {...props}>{children}</StyledLinkButton>
+);
+
+LinkButton.propTypes = {
+  color: PropTypes.oneOf(['yellow', 'red', 'green', 'purple', 'grey']),
+};
+
+LinkButton.defaultProps = {
+  color: 'yellow',
+};

@@ -5,23 +5,9 @@ import { Link } from 'react-router-dom';
 import { Formik } from 'formik';
 import AuthService from '../../../services/auth';
 import { withAuthContext } from '../../../contexts/AuthContext';
-import Form from '../../ui/Form';
-import Button from '../../ui/Button';
+import { Page, Form, Button } from '../../ui';
 
 const EMAIL_REGEX = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
-
-const ContentContainer = styled.div`
-  flex: 1;
-  background-color: ${props => props.theme.background.container};
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-`;
-
-const SigninForm = styled(Form)`
-  width: 300px;
-`;
 
 const Title = styled.h3`
   font: ${props => props.theme.size.XXL} "Open Sans Bold", sans-serif;
@@ -51,7 +37,7 @@ class SigninPage extends Component {
   render() {
     console.log('SigninPage.render');
     return (
-      <ContentContainer>
+      <Page.FlexContent direction="column" align="center" justify="center">
         <Title>Connexion</Title>
         <Formik
           initialValues={{ email: '', password: '' }}
@@ -82,7 +68,7 @@ class SigninPage extends Component {
               handleSubmit,
               isSubmitting,
             }) => (
-            <SigninForm onSubmit={handleSubmit}>
+            <Form width={300} onSubmit={handleSubmit}>
               <Form.Group>
                 <Form.Label htmlFor="email">Email</Form.Label>
                 <Form.Input
@@ -110,12 +96,12 @@ class SigninPage extends Component {
               <Form.Actions>
                 <Button type="submit" disabled={isSubmitting}>Go</Button>
               </Form.Actions>
-            </SigninForm>
+            </Form>
           )}
         </Formik>
         <p>Nouveau parmi nous ? <Link to="/auth/signup">Inscrivez</Link> vous !</p>
         <Link to="/auth/forgot-password">Mot de passe oublié ?</Link>
-      </ContentContainer>
+      </Page.FlexContent>
     );
   }
 }

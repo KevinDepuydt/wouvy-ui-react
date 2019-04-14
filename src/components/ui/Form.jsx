@@ -5,6 +5,7 @@ import darken from 'polished/lib/color/darken';
 
 const StyledForm = styled.form`
   margin: 0 auto;
+  ${props => props.width && `width: ${props.width}px;`}
 `;
 
 const Group = styled.div`

@@ -4,7 +4,7 @@ import onClickOutside from 'react-onclickoutside';
 import styled from 'styled-components';
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import Image from './ui/Image';
+import { Image } from './ui';
 
 const Container = styled.div`
   position: relative;

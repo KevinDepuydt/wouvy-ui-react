@@ -10,4 +10,4 @@ class UserService extends ApiService {
   }
 }
 
-export default new UserService();
+export default UserService;

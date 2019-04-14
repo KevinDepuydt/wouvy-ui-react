@@ -3,11 +3,8 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Formik } from 'formik';
 import { withAuthContext } from '../../contexts/AuthContext';
-import userService from '../../services/user';
-import Form from '../ui/Form';
-import Button from '../ui/Button';
-import Page from '../ui/Page';
-import Image from '../ui/Image';
+import UserService from '../../services/user';
+import { Form, Button, Page, Image } from '../ui';
 
 const ProfileForm = styled(Form)`
   max-width: 32rem;
@@ -39,11 +36,16 @@ class UserProfilePage extends Component {
     authenticate: PropTypes.func.isRequired,
   };
 
+  constructor(props) {
+    super(props);
+    this.users = new UserService();
+  }
+
   async handleProfileSubmit(values, { setSubmitting }) {
     console.log('UserProfilePage.handleProfileSubmit', values);
     try {
       const updatedUser = Object.assign(this.props.user, values);
-      const { message, token } = await userService.update(updatedUser);
+      const { message, token } = await this.users.update(updatedUser);
       console.log('UserProfilePage.handleProfileSubmit: success', message, token);
       if (token) {
         this.props.authenticate(token);
@@ -57,7 +59,7 @@ class UserProfilePage extends Component {
   async handlePasswordSubmit(values, { setSubmitting }) {
     console.log('UserProfilePage.handlePasswordSubmit', values);
     try {
-      const { message, token } = await userService.updatePassword(this.props.user._id, values);
+      const { message, token } = await this.users.updatePassword(this.props.user._id, values);
       console.log('UserProfilePage.handlePasswordSubmit: success', message, token);
       if (token) {
         this.props.authenticate(token);

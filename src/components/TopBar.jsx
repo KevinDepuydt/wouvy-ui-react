@@ -71,22 +71,28 @@ class TopBar extends React.Component {
     logout: PropTypes.func.isRequired,
   };
 
+  _renderUserMenu() {
+    return (<UserMenu user={this.props.user} logout={this.props.logout} />);
+  }
+
+  _renderAuthMenu() {
+    return (
+      <MenuLinks>
+        <MenuLink to="/auth/signin" activeClassName="active">Connexion</MenuLink>
+        <MenuLink to="/auth/signup" activeClassName="active">Inscription</MenuLink>
+      </MenuLinks>
+    );
+  }
+
   render() {
-    const { user, logout } = this.props;
     return (
       <Container>
         <Link to="/">
           <AppLogo src={logoSrc} alt="Wouvy" />
         </Link>
-        {user
-          ? (
-            <UserMenu user={user} logout={logout} />
-          ) : (
-            <MenuLinks>
-              <MenuLink to="/auth/signin" activeClassName="active">Connexion</MenuLink>
-              <MenuLink to="/auth/signup" activeClassName="active">Inscription</MenuLink>
-            </MenuLinks>
-          )
+        {this.props.user
+          ? this._renderUserMenu.bind(this)()
+          : this._renderAuthMenu.bind(this)()
         }
       </Container>
     )

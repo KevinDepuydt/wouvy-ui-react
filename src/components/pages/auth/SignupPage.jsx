@@ -5,24 +5,9 @@ import { Link } from 'react-router-dom';
 import { Formik } from 'formik';
 import AuthService from '../../../services/auth';
 import { withAuthContext } from '../../../contexts/AuthContext';
-import Form from '../../ui/Form';
-import Button from '../../ui/Button';
-import Checkbox from '../../ui/Checkbox';
+import { Page, Form, Button, Checkbox } from '../../ui';
 
 const EMAIL_REGEX = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
-
-const ContentContainer = styled.div`
-  flex: 1;
-  background-color: ${props => props.theme.background.container};
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-`;
-
-const SignupForm = styled(Form)`
-  width: 300px;
-`;
 
 const Title = styled.h3`
   font: ${props => props.theme.size.XXL} "Open Sans Bold", sans-serif;
@@ -52,7 +37,7 @@ class SignupPage extends Component {
   render() {
     console.log('SignupPage.render');
     return (
-      <ContentContainer>
+      <Page.FlexContent direction="column" align="center" justify="center">
         <Title>Inscription</Title>
         <Formik
           initialValues={{ email: '', password: '', confirmation: '', acceptCGUV: false }}
@@ -87,7 +72,7 @@ class SignupPage extends Component {
               setFieldValue,
               /* and other goodies */
             }) => (
-            <SignupForm onSubmit={handleSubmit}>
+            <Form width={300} onSubmit={handleSubmit}>
               <Form.Group>
                 <Form.Label htmlFor="email">Email</Form.Label>
                 <Form.Input
@@ -135,11 +120,11 @@ class SignupPage extends Component {
               <Form.Actions>
                 <Button type="submit" disabled={isSubmitting}>Go</Button>
               </Form.Actions>
-            </SignupForm>
+            </Form>
           )}
         </Formik>
         <p>Déjà inscrit ? <Link to="/auth/signin" className="link">Connectez</Link> vous !</p>
-      </ContentContainer>
+      </Page.FlexContent>
     );
   }
 }
