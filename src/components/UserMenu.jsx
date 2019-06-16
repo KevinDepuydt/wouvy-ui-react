@@ -2,44 +2,31 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import onClickOutside from 'react-onclickoutside';
 import styled from 'styled-components';
-import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Image } from './ui';
 
 const Container = styled.div`
   position: relative;
-`;
-
-const Head = styled.div`
-  display: flex;
-  align-items: center;
-  height: 100%;
-  cursor: pointer;
+  width: 2.5rem;
+  height: 2.5rem;
 `;
 
 const UserImage = styled(Image)`
-  width: 50px;
-  height: 50px;
-  border-radius: 50px;
-  margin-right: 5px;
-`;
-
-const StyledIcon = styled(FontAwesomeIcon)`
-  font-size: 13px;
-  color: #d1d1d1;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 2.5rem;
+  cursor: pointer;
 `;
 
 const Menu = styled.div`
   background-color: white;
   padding: 5px;
   transition: display 0.2s ease;
-  min-width: 230px;
   border-radius: 4px;
   box-shadow: 0 1px 5px 2px rgba(0,0,0,0.05);
   z-index: 10;
   position: absolute;
-  top: 60px;
-  right: 0;
+  bottom: 0;
+  left: calc(100% + 5px);
 `;
 
 const MenuLink = styled(Link)`
@@ -59,6 +46,7 @@ const MenuLink = styled(Link)`
   
   i, svg {
     font-size: 16px;
+    margin-left: 1rem;
   }
 `;
 
@@ -90,6 +78,7 @@ const LogoutButton = styled.button`
   
   i, svg {
     font-size: 16px;
+    margin-left: 1rem;
   }
 `;
 
@@ -98,10 +87,7 @@ const UserMenu = ({ user, logout }) => {
   UserMenu.handleClickOutside = () => setIsOpen(false);
   return (
     <Container>
-      <Head onClick={() => setIsOpen(!isOpen)}>
-        <UserImage src={user.picture} errSrc={user.avatar} alt="user profile" />
-        <StyledIcon icon={faChevronDown} />
-      </Head>
+      <UserImage onClick={() => setIsOpen(!isOpen)} onMouseEnter={() => setIsOpen(true)} src={user.picture} errSrc={user.avatar} alt="user profile" />
       {isOpen && (
         <Menu>
           <MenuLink to="/profile">

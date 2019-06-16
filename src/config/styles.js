@@ -20,8 +20,8 @@ import IcomoonWoff from '../assets/fonts/icomoon.woff';
 export const theme = {
   background: {
     body: '#f8f9fa',
-    topMenu: '#fff',
-    container: '#f5f5f5',
+    appMenu: '#fff',
+    container: '#fff',
   },
   color: {
     white: '#ffffff',
@@ -235,7 +235,7 @@ export const GlobalStyle = createGlobalStyle`
   
   #root {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     height: 100vh;
     width: 100vw;
     overflow: hidden;

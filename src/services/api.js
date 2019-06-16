@@ -23,14 +23,14 @@ export default class ApiService {
   async get(path) {
     return this.baseRequest({
       method: 'get',
-      uri: `${this.apiUrl}/${path}`,
+      uri: `${this.apiUrl}${path}`,
     });
   }
 
   async post(path, body) {
     return this.baseRequest({
       method: 'post',
-      uri: `${this.apiUrl}/${path}`,
+      uri: `${this.apiUrl}${path}`,
       body,
     });
   }
@@ -38,7 +38,7 @@ export default class ApiService {
   async put(path, body) {
     return this.baseRequest({
       method: 'put',
-      uri: `${this.apiUrl}/${path}`,
+      uri: `${this.apiUrl}${path}`,
       body,
     });
   }
@@ -46,7 +46,7 @@ export default class ApiService {
   async delete(path) {
     return this.baseRequest({
       method: 'delete',
-      uri: `${this.apiUrl}/${path}`,
+      uri: `${this.apiUrl}${path}`,
     });
   }
 }

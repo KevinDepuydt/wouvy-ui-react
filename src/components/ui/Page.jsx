@@ -4,7 +4,7 @@ import styled from 'styled-components';
 const PageContent = styled.div`
   padding: 1.25rem;
   overflow-y: auto;
-  background-color: ${props => props.theme.background.container};
+  background-color: ${({ theme }) => theme.background.container};
   flex: 1;
 `;
 
@@ -19,8 +19,7 @@ const Title = styled.h3`
   font: ${props => props.theme.size.XXL} "Open Sans Bold", sans-serif;
   color: ${props => props.theme.color.darkGray};
   margin: 0 0 ${props => props.theme.size.L};
-  padding: ${props => props.theme.size.XS} 0 calc(${props => props.theme.size.XS} / 2);
-  border-bottom: 1px dashed #efefef;
+  padding: 0;
 `;
 
 const Box = styled.div``;

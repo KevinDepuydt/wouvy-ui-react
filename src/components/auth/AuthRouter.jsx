@@ -1,13 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Route } from '../../../AppRouter';
-import SigninPage from './SigninPage';
-import SignupPage from './SignupPage';
-import AuthCallbackPage from './AuthCallbackPage';
-import { Page } from '../../ui';
-import env from '../../../env';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFacebookF, faGithub, faGoogle, faLinkedin } from '@fortawesome/free-brands-svg-icons';
+import { Route } from '../../AppRouter';
+import SigninPage from './Signin';
+import SignupPage from './Signup';
+import AuthCallbackPage from './AuthCallback';
+import { Page } from '../ui';
+import env from '../../env';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome/index';
+import { faFacebookF, faGithub, faGoogle, faLinkedin } from '@fortawesome/free-brands-svg-icons/index';
 
 const PageFlexContent = styled(Page.FlexContent)`
   padding: 0;
@@ -62,7 +62,7 @@ const SocialAuthLink = ({ network, icon }) => (
   </StyledAuthLink>
 );
 
-const AuthPage = ({ match }) => (
+const AuthRouter = ({ match }) => (
   <PageFlexContent direction="row">
     <SocialAuthContainer>
       <SocialAuthLink network="google" icon={faGoogle} />
@@ -76,4 +76,4 @@ const AuthPage = ({ match }) => (
   </PageFlexContent>
 );
 
-export default AuthPage;
+export default AuthRouter;

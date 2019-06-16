@@ -1,9 +1,10 @@
 import React from 'react';
 import { BrowserRouter, Switch, Route as BaseRoute, Redirect } from 'react-router-dom';
 import { AuthContext, withLoading } from './contexts/AuthContext';
-import { AuthPage, HomePage, NotFoundPage, UserProfilePage, WorkflowCreatePage } from './components/pages';
-import TopBar from './components/TopBar';
+import { AuthRouter, NotFound, UserProfilePage } from './components/pages';
+import AppMenu from './components/AppMenu';
 import AppLoader from './components/AppLoader';
+import WorkflowRouter from './components/workflow/WorkflowRouter';
 
 /**
  * Protected route redirects user to signin page if not logged in
@@ -36,19 +37,16 @@ export const Route = ({ component: Component, ...props }) => (
 const AppRouter = ({ loading }) => (
   <BrowserRouter>
     {loading
-      ? (<AppLoader />)
-      : (
-        <React.Fragment>
-          <TopBar />
+      ? <AppLoader />
+      : <React.Fragment>
+          <AppMenu />
           <Switch>
-            <ProtectedRoute exact path="/" component={HomePage} />
+            <Route path="/auth" component={AuthRouter} />
             <ProtectedRoute path="/profile" component={UserProfilePage} />
-            <ProtectedRoute path="/w/create" component={WorkflowCreatePage} />
-            <Route path="/auth" component={AuthPage} />
-            <BaseRoute component={NotFoundPage} />
+            <ProtectedRoute path="/" component={WorkflowRouter} />
+            <BaseRoute component={NotFound} />
           </Switch>
         </React.Fragment>
-      )
     }
   </BrowserRouter>
 );
