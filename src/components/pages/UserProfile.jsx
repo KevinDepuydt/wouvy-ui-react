@@ -11,18 +11,21 @@ const ProfileForm = styled(Form)`
   margin: 0;
 `;
 
+const UserPictureBox = styled(Page.Box)`
+  padding: 2rem 1rem 0;
+`;
+
 const UserPicture = styled(Image)`
-  width: 11.25rem;
-  height: 11.25rem;
+  width: 10rem;
+  height: 10rem;
   border-radius: 50%;
-  margin: 1.875rem 2.2rem 0 0;
 `;
 
 const PaddedFlexBox = styled(Page.FlexBox)`
   padding: 0 1rem;
 `;
 
-class UserProfilePage extends Component {
+class UserProfile extends Component {
   static propTypes = {
     user: PropTypes.shape({
       _id: PropTypes.string.isRequired,
@@ -42,30 +45,30 @@ class UserProfilePage extends Component {
   }
 
   async handleProfileSubmit(values, { setSubmitting }) {
-    console.log('UserProfilePage.handleProfileSubmit', values);
+    console.log('UserProfile.handleProfileSubmit', values);
     try {
       const updatedUser = Object.assign(this.props.user, values);
       const { message, token } = await this.users.update(updatedUser);
-      console.log('UserProfilePage.handleProfileSubmit: success', message, token);
+      console.log('UserProfile.handleProfileSubmit: success', message, token);
       if (token) {
         this.props.authenticate(token);
       }
     } catch (e) {
-      console.log('UserProfilePage.handleProfileSubmit: error', e);
+      console.log('UserProfile.handleProfileSubmit: error', e);
     }
     setSubmitting(false);
   }
 
   async handlePasswordSubmit(values, { setSubmitting }) {
-    console.log('UserProfilePage.handlePasswordSubmit', values);
+    console.log('UserProfile.handlePasswordSubmit', values);
     try {
       const { message, token } = await this.users.updatePassword(this.props.user._id, values);
-      console.log('UserProfilePage.handlePasswordSubmit: success', message, token);
+      console.log('UserProfile.handlePasswordSubmit: success', message, token);
       if (token) {
         this.props.authenticate(token);
       }
     } catch (e) {
-      console.log('UserProfilePage.handlePasswordSubmit: error', e);
+      console.log('UserProfile.handlePasswordSubmit: error', e);
     }
     setSubmitting(false);
   }
@@ -75,9 +78,9 @@ class UserProfilePage extends Component {
     return (
       <Page>
         <Page.FlexRow>
-          <Page.Box>
+          <UserPictureBox>
             <UserPicture src={picture} errSrc={avatar} alt="user profile" />
-          </Page.Box>
+          </UserPictureBox>
           <PaddedFlexBox>
             <Page.Title>Mon profil</Page.Title>
             <Formik
@@ -202,4 +205,4 @@ class UserProfilePage extends Component {
   }
 }
 
-export default withAuthContext(UserProfilePage);
+export default withAuthContext(UserProfile);

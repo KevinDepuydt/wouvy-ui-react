@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 import { darken, lighten, rgba } from 'polished';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const btnStyles = css`
   padding: ${props => props.theme.size.XXS} ${props => props.theme.size.S};
@@ -45,6 +46,7 @@ const btnStyles = css`
   }
 `;
 
+// Button
 const StyledButton = styled.button`
   ${btnStyles}
 `;
@@ -61,6 +63,7 @@ Button.defaultProps = {
   color: 'yellow',
 };
 
+// Link button
 const StyledLinkButton = styled(Link)`
   ${btnStyles}
   text-decoration: none;
@@ -75,5 +78,40 @@ LinkButton.propTypes = {
 };
 
 LinkButton.defaultProps = {
+  color: 'yellow',
+};
+
+// Link Icon button
+const StyledLinkIconButton = styled(Link)`
+  border: none;
+  background: none;
+  padding: 0;
+  outline: none;
+  cursor: pointer;
+  height: none;
+  width: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  text-decoration: none;
+
+  &:hover {
+    cursor: pointer;
+  }
+`;
+
+export const LinkIconButton = ({ icon, ...props }) => (
+  <StyledLinkIconButton {...props}>
+    <FontAwesomeIcon icon={icon} />
+  </StyledLinkIconButton>
+);
+
+LinkIconButton.propTypes = {
+  color: PropTypes.oneOf(['yellow', 'red', 'green', 'purple', 'grey']),
+  icon: PropTypes.shape({}).isRequired,
+};
+
+LinkIconButton.defaultProps = {
   color: 'yellow',
 };

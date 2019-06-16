@@ -1,13 +1,11 @@
-import AuthPage from './auth/AuthPage';
-import UserProfilePage from './UserProfilePage';
-import HomePage from './HomePage';
-import NotFoundPage from './NotFoundPage';
-import WorkflowCreatePage from './workflow/WorkflowCreatePage';
+import AuthRouter from '../auth/AuthRouter';
+import UserProfilePage from './UserProfile';
+import HomePage from './Home';
+import NotFound from './NotFound';
 
 export {
-  AuthPage,
+  AuthRouter,
   UserProfilePage,
   HomePage,
-  NotFoundPage,
-  WorkflowCreatePage,
+  NotFound,
 };

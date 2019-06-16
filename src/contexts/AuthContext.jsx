@@ -5,7 +5,7 @@ const AuthContext = createContext([]);
 
 export const USER_TOKEN_KEY = 'token';
 
-class AuthProvider extends React.Component {
+export default class AuthProvider extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -87,4 +87,4 @@ const withLoading = Component => props => (
   </AuthContext.Consumer>
 );
 
-export { AuthContext, AuthProvider, withAuthContext, withUser, withLoading };
+export { AuthContext, withAuthContext, withUser, withLoading };
