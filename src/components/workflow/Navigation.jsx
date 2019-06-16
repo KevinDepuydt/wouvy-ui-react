@@ -21,10 +21,13 @@ const WorkflowNavLink = styled(NavLink)`
   font-family: "Open Sans Semi Bold", sans-serif;
   font-size: ${({ theme }) => theme.size.M};
   color: ${({ theme }) => theme.color.darkGray};
-  padding: 0.2rem 0;
-  
-  &:hover {
-    cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 300ms ease;
+
+  &:hover, &:focus {
+    background-color: rgba(0,0,0,0.05);
   }
 
   span {
@@ -32,14 +35,24 @@ const WorkflowNavLink = styled(NavLink)`
   }
   
   &.active {
-    i, svg {
-      color: ${({ theme }) => theme.color.yellow};
-    }
+    background-color: ${({ theme }) => theme.color.yellow};
+    color: white;
   }
 `;
 
 const WorkflowNavigation = styled.div`
   margin-top: 1.5rem;
+  
+  ${WorkflowNavLink} ~ ${WorkflowNavLink} {
+    margin-top: 0.2rem;
+  }
+`;
+
+const Label = styled.label`
+  display: block;
+  margin-bottom: ${({ theme }) => theme.size.XXS};
+  font-size: ${({ theme }) => theme.size.S};
+  font-weight: 700;
 `;
 
 class Navigation extends React.Component {
@@ -48,7 +61,6 @@ class Navigation extends React.Component {
   };
 
   render() {
-    console.log('Navigation.props', this.props);
     const { currentWorkflow, workflows, setCurrentWorkflow, onWorkflowChange } = this.props;
     return (
       <Wrapper>
@@ -63,6 +75,7 @@ class Navigation extends React.Component {
         />
         {currentWorkflow !== null && (
           <WorkflowNavigation>
+            <Label>Workflow menu</Label>
             <WorkflowNavLink to={`/w/${currentWorkflow._id}/tasks`}>
               <i className="icon-tache" aria-hidden="true" />
               <span>Tâches</span>
