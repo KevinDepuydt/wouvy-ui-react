@@ -11,6 +11,7 @@ const Wrapper = styled.div`
   color: ${({ theme }) => theme.color.darkGray};
   cursor: pointer;
   position: relative;
+  flex: 1;
   
   .placeholder {
     font: ${({ theme }) => theme.size.S} "Open Sans Semi Bold", sans-serif;

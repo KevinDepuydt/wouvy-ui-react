@@ -52,17 +52,6 @@ class Home extends Component {
     this.setState({ workflows });
   }
 
-  async handleSubmit(values, { setSubmitting }) {
-    console.log('WorkflowCreate.handleSubmit', values);
-    try {
-      const result = await this.workflowService.create(values);
-      console.log('WorkflowCreate.handleSubmit: success', result);
-    } catch (e) {
-      console.log('WorkflowCreate.handleSubmit: error', e);
-    }
-    setSubmitting(false);
-  }
-
   render() {
     console.log('Home.render', this.props, this.state.workflows);
     const { user } = this.props;

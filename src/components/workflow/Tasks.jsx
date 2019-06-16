@@ -1,12 +1,16 @@
 import React from 'react';
+import { withWorkflow } from '../../contexts/WorkflowContext';
 import { Page} from '../ui';
 
-export default class Tasks extends React.Component {
+class Tasks extends React.Component {
   render() {
-    return (
+    const { workflow } = this.props;
+    return workflow ? (
       <React.Fragment>
-        <Page.Title>Tâches</Page.Title>
+        <Page.Title>Tâches ({workflow.name})</Page.Title>
       </React.Fragment>
-    );
+    ) : null;
   }
 }
+
+export default withWorkflow(Tasks);

@@ -3,7 +3,10 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
 import { withWorkflowContext } from '../../contexts/WorkflowContext';
-import { Select } from '../ui';
+import { Button, Modal, Select } from '../ui';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import WorkflowForm from '../forms/WorkflowForm';
 
 const Wrapper = styled.div`
   width: 20vw;
@@ -35,7 +38,7 @@ const WorkflowNavLink = styled(NavLink)`
   }
   
   &.active {
-    background-color: ${({ theme }) => theme.color.yellow};
+    background-color: ${({ theme }) => theme.color.darkGray};
     color: white;
   }
 `;
@@ -55,27 +58,59 @@ const Label = styled.label`
   font-weight: 700;
 `;
 
+const SelectionContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  
+  button {
+    margin-left: 10px;
+  }
+`;
+
 class Navigation extends React.Component {
   static propTypes = {
     onWorkflowChange: PropTypes.func.isRequired,
   };
 
+  async handleSubmit(values, { setSubmitting }) {
+    console.log('WorkflowCreate.handleSubmit', values);
+    try {
+      const result = await this.props.workflowService.create(values);
+      console.log('WorkflowCreate.handleSubmit: success', result);
+    } catch (e) {
+      console.log('WorkflowCreate.handleSubmit: error', e);
+    }
+    setSubmitting(false);
+  }
+
   render() {
     const { currentWorkflow, workflows, setCurrentWorkflow, onWorkflowChange } = this.props;
     return (
       <Wrapper>
-        <Select
-          label="Workflow sélectionné"
-          value={currentWorkflow ? currentWorkflow._id : null}
-          options={workflows.map(w => ({ value: w._id, label: w.name }))}
-          onSelect={(workflowId) => {
-            setCurrentWorkflow(workflowId);
-            onWorkflowChange(workflowId);
-          }}
-        />
+        <Label>Workflow sélectionné</Label>
+        <SelectionContainer>
+          <Select
+            value={currentWorkflow ? currentWorkflow._id : null}
+            options={workflows.map(w => ({ value: w._id, label: w.name }))}
+            onSelect={(workflowId) => {
+              setCurrentWorkflow(workflowId);
+              onWorkflowChange(workflowId);
+            }}
+          />
+          <Modal
+            title="Nouveau Workflow"
+            trigger={(toggleOpen) => (
+              <Button onClick={toggleOpen}>
+                <FontAwesomeIcon icon={faPlus} />
+              </Button>
+            )}
+          >
+            <WorkflowForm onSubmit={this.handleSubmit.bind(this)} />
+          </Modal>
+        </SelectionContainer>
         {currentWorkflow !== null && (
           <WorkflowNavigation>
-            <Label>Workflow menu</Label>
+            <Label>Elements du workflow</Label>
             <WorkflowNavLink to={`/w/${currentWorkflow._id}/tasks`}>
               <i className="icon-tache" aria-hidden="true" />
               <span>Tâches</span>

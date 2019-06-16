@@ -31,6 +31,7 @@ export default class WorkflowProvider extends React.Component {
       <WorkflowContext.Provider
         value={{
           ...this.state,
+          workflowService: this.service,
           setCurrentWorkflow: this.setCurrentWorkflow.bind(this),
         }}
       >
