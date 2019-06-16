@@ -22,7 +22,7 @@ const WorkflowNavLink = styled(NavLink)`
   align-items: center;
   text-decoration: none;
   font-family: "Open Sans Semi Bold", sans-serif;
-  font-size: ${({ theme }) => theme.size.M};
+  font-size: ${({ theme }) => theme.size.S};
   color: ${({ theme }) => theme.color.darkGray};
   padding: 0.5rem;
   border-radius: 4px;
