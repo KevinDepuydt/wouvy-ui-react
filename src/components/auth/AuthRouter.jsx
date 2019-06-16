@@ -20,11 +20,12 @@ const SocialAuthContainer = styled.div`
   align-items: center;
   justify-content: center;
   padding: 0 5rem;
-  background-color: ${props => props.theme.color.white};
+  background-color: ${props => props.theme.color.lighterGray};
+  box-shadow: ${({ theme }) => theme.shadow.default};
 `;
 
 const StyledAuthLink = styled.a`
-  font-size: 3rem;
+  font-size: 2.5rem;
   margin: ${props => props.theme.size.XS};
   text-decoration: none;
   cursor: pointer;
