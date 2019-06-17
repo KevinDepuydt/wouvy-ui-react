@@ -27,7 +27,7 @@ const WorkflowNavLink = styled(NavLink)`
   padding: 0.5rem;
   border-radius: 4px;
   cursor: pointer;
-  transition: background-color 300ms ease;
+  transition: background-color 100ms ease;
 
   &:hover, &:focus {
     background-color: rgba(0,0,0,0.05);
@@ -47,7 +47,7 @@ const WorkflowNavigation = styled.div`
   margin-top: 1.5rem;
   
   ${WorkflowNavLink} ~ ${WorkflowNavLink} {
-    margin-top: 0.2rem;
+    margin-top: 0.25rem;
   }
 `;
 
