@@ -14,7 +14,7 @@ export default class ApiService {
 
     this.baseRequest = rp.defaults({
       headers: {
-        'x-api-token': token,
+        'Authorization': `Bearer ${token}`,
       },
       json: true,
     });

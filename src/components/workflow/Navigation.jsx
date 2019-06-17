@@ -27,10 +27,11 @@ const WorkflowNavLink = styled(NavLink)`
   padding: 0.5rem;
   border-radius: 4px;
   cursor: pointer;
-  transition: background-color 100ms ease;
+  border-left: 0 solid transparent;
+  transition: background-color 100ms ease, border 200ms ease;
 
   &:hover, &:focus {
-    background-color: rgba(0,0,0,0.05);
+    border-left-width: 5px;
   }
 
   span {
@@ -38,8 +39,9 @@ const WorkflowNavLink = styled(NavLink)`
   }
   
   &.active {
-    background-color: ${({ theme }) => theme.color.darkGray};
-    color: white;
+    border-left-width: 8px;
+    background-color: rgba(0,0,0,0.05);
+    font-family: "Open Sans Bold", sans-serif;
   }
 `;
 
