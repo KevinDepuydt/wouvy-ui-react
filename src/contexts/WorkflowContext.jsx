@@ -15,6 +15,7 @@ export default class WorkflowProvider extends React.Component {
 
   async componentWillMount() {
     const workflows = await this.service.list();
+    console.log('WFs', workflows);
     const lastWorkflowId = localStorage.getItem('lastWorkflowId');
     const currentWorkflow = lastWorkflowId !== null ? workflows.find(w => w._id === lastWorkflowId) : null;
     this.setState({ workflows, currentWorkflow });

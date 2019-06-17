@@ -89,14 +89,16 @@ class Navigation extends React.Component {
       <Wrapper>
         <Label>Workflow sélectionné</Label>
         <SelectionContainer>
-          <Select
-            value={currentWorkflow ? currentWorkflow._id : null}
-            options={workflows.map(w => ({ value: w._id, label: w.name }))}
-            onSelect={(workflowId) => {
-              setCurrentWorkflow(workflowId);
-              onWorkflowChange(workflowId);
-            }}
-          />
+          {workflows.length > 0 && (
+            <Select
+              value={currentWorkflow ? currentWorkflow._id : null}
+              options={workflows.map(w => ({ value: w._id, label: w.name }))}
+              onSelect={(workflowId) => {
+                setCurrentWorkflow(workflowId);
+                onWorkflowChange(workflowId);
+              }}
+            />
+          )}
           <Modal
             title="Nouveau Workflow"
             trigger={(toggleOpen) => (
