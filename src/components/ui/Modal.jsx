@@ -87,35 +87,40 @@ export default class Modal extends React.Component {
     this.state = {
       open: false,
     };
+    this.open = this.open.bind(this);
   }
 
   open() {
-    this.setState(({ open: true }));
+    this.setState({ open: true });
   }
 
   close() {
-    this.setState(({ open: false }));
+    this.setState({ open: false });
   }
 
   render() {
     const { children, trigger, title } = this.props;
     const { open } = this.state;
 
-    // render if visible
-    return open ? (
-      <ModalWrapper>
-        <ModalContainer>
-          <ModalHead>
-            <ModalTitle>{title}</ModalTitle>
-            <ModalCloseButton onClick={this.close.bind(this)}>
-              <FontAwesomeIcon icon={faTimes} />
-            </ModalCloseButton>
-          </ModalHead>
-          <ModalContent>
-            {children}
-          </ModalContent>
-        </ModalContainer>
-      </ModalWrapper>
-    ) : trigger(this.open.bind(this));
+    return (
+      <React.Fragment>
+        {trigger(this.open)}
+        {open && (
+          <ModalWrapper>
+            <ModalContainer>
+              <ModalHead>
+                <ModalTitle>{title}</ModalTitle>
+                <ModalCloseButton onClick={this.close.bind(this)}>
+                  <FontAwesomeIcon icon={faTimes} />
+                </ModalCloseButton>
+              </ModalHead>
+              <ModalContent>
+                {children}
+              </ModalContent>
+            </ModalContainer>
+          </ModalWrapper>
+        )}
+      </React.Fragment>
+    );
   }
 }

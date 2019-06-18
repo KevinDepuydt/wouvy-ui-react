@@ -115,3 +115,27 @@ LinkIconButton.propTypes = {
 LinkIconButton.defaultProps = {
   color: 'yellow',
 };
+
+// Icon Button
+const StyledIconButton = styled.button`
+  ${btnStyles}
+  padding: 0.3rem;
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: 2rem;
+  line-height: 0.5rem;
+`;
+
+export const IconButton = ({ icon, ...props }) => (
+  <StyledIconButton {...props}>
+    <FontAwesomeIcon icon={icon} />
+  </StyledIconButton>
+);
+
+IconButton.propTypes = {
+  color: PropTypes.oneOf(['yellow', 'red', 'green', 'purple', 'grey']),
+};
+
+IconButton.defaultProps = {
+  color: 'yellow',
+};

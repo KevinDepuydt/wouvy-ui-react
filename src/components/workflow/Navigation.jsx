@@ -3,8 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
 import { withWorkflowContext } from '../../contexts/WorkflowContext';
-import { Button, Modal, Select } from '../ui';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { IconButton, Modal, Select } from '../ui';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import WorkflowForm from '../forms/WorkflowForm';
 
@@ -53,10 +52,15 @@ const WorkflowNavigation = styled.div`
   }
 `;
 
-const Label = styled.label`
-  display: block;
+const FlexContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   margin-bottom: ${({ theme }) => theme.size.XXS};
-  font-size: ${({ theme }) => theme.size.S};
+`;
+
+const Label = styled.label`
+  font-size: ${({ theme }) => theme.size.M};
   font-weight: 700;
 `;
 
@@ -89,7 +93,23 @@ class Navigation extends React.Component {
     const { currentWorkflow, workflows, setCurrentWorkflow, onWorkflowChange } = this.props;
     return (
       <Wrapper>
-        <Label>Workflow sélectionné</Label>
+        <FlexContainer>
+          <Label>Workflow sélectionné</Label>
+          <Modal
+            title="Nouveau Workflow"
+            trigger={(toggleOpen) => (
+              <IconButton
+                icon={faPlus}
+                onClick={() => {
+                  console.log('Navigation.render: trigger button click');
+                  toggleOpen();
+                }}
+              />
+            )}
+          >
+            <WorkflowForm onSubmit={this.handleSubmit.bind(this)} />
+          </Modal>
+        </FlexContainer>
         <SelectionContainer>
           {workflows.length > 0 && (
             <Select
@@ -101,16 +121,6 @@ class Navigation extends React.Component {
               }}
             />
           )}
-          <Modal
-            title="Nouveau Workflow"
-            trigger={(toggleOpen) => (
-              <Button onClick={toggleOpen}>
-                <FontAwesomeIcon icon={faPlus} />
-              </Button>
-            )}
-          >
-            <WorkflowForm onSubmit={this.handleSubmit.bind(this)} />
-          </Modal>
         </SelectionContainer>
         {currentWorkflow !== null && (
           <WorkflowNavigation>

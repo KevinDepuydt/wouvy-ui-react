@@ -1,4 +1,4 @@
-import { Button, LinkButton, LinkIconButton } from './Button';
+import { Button, IconButton, LinkButton, LinkIconButton } from './Button';
 import Checkbox from './Checkbox';
 import Form from './Form';
 import Image from './Image';
@@ -8,6 +8,7 @@ import Select from './Select';
 
 export {
   Button,
+  IconButton,
   LinkButton,
   LinkIconButton,
   Checkbox,
